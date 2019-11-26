@@ -2,6 +2,8 @@ package com.example.inclass13_group1_4;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
     Button buttonadd;
     ArrayList<Trip> trips = new ArrayList<Trip>();
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     private static final int ADD_TRIP_REQ_CODE = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mRecyclerView = findViewById(R.id.my_recycler_view);
         buttonadd = findViewById(R.id.buttonaddTrip);
         buttonadd.setOnClickListener(new View.OnClickListener() {
 
@@ -44,7 +49,15 @@ public class MainActivity extends AppCompatActivity {
                 Trip trip = new Trip(name,city);
                 trips.add(trip);
                 Log.d("demo",trips.toString());
+                updateRecyclerView();
             }
         }
+    }
+
+    public void updateRecyclerView(){
+        mLayoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter =  new TripAdator(trips);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

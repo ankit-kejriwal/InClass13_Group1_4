@@ -55,7 +55,7 @@ public class AddTrip extends AppCompatActivity {
 
                 String input ="input="+editTextcity.getText().toString();
 
-                String apikey = "key="+ "AIzaSyDs49ADB1yG0Nz7BbiaaSOR87SrO7mXp74";
+                String apikey = "key="+ "";
                 String types = "types=(cities)";
                 String url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?"+ input+"&" +types+"&"+apikey;
                 new GetNewsAsync().execute(url);
